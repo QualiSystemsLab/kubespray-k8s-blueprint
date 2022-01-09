@@ -3,7 +3,7 @@
 set -x # enable trace
 set -e # enable exit on first error
 
-KUBESPRAY_VERSION=2.17.1
+KUBESPRAY_VERSION=2.18.0
 YQ_VERSION=4.15.1
 
 # validate that all needed variables were passed from orch script
