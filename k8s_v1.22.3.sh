@@ -11,6 +11,7 @@ while read -r env_var; do
   [ -z "${!env_var}" ] && { echo "$env_var is empty or not set. Exiting.."; exit 1; }
 done << EOF
 APPLICATIONS_TO_CONFIGURE
+KUBERNETES_VERSION
 METALLB_IP_RANGE
 SSH_PASSWORD
 SSH_USER
@@ -31,7 +32,7 @@ yum install python3 -y
 # get kubespray release version if not exist already
 KUBESPRAY_FOLDER=./kubespray-"${KUBESPRAY_VERSION}"
 if [[ ! -d "${KUBESPRAY_FOLDER}" ]]; then
-        wget https://github.com/kubernetes-sigs/kubespray/archive/6eeb4883af600400d31d9431245acc8e1e27a164.zip -O ./kubespray.zip
+        wget https://github.com/kubernetes-sigs/kubespray/archive/refs/tags/v"${KUBESPRAY_VERSION}".zip -O ./kubespray.zip
         unzip ./kubespray.zip
         rm ./kubespray.zip -f
 fi
@@ -67,6 +68,7 @@ fi
 # update yml files in place
 ./yqk e -i '
         .kube_proxy_strict_arp = true |
+        .kube_version = strenv(KUBERNETES_VERSION)
 ' "${KUBESPRAY_FOLDER}"/inventory/mycluster/group_vars/k8s_cluster/k8s-cluster.yml
 
 ./yqk e -i '
