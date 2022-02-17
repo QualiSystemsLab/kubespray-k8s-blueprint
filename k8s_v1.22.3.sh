@@ -5,6 +5,7 @@ set -e # enable exit on first error
 
 KUBESPRAY_VERSION=2.17.1
 YQ_VERSION=4.15.1
+KUBERNETES_VERSION=1.22.3
 
 # validate that all needed variables were passed from orch script
 while read -r env_var; do
