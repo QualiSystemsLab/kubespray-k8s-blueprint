@@ -24,7 +24,11 @@ set -u # no unset variables
 cd ~/ 
 # create a working folder and switch to it
 mkdir -p kubespray-config && cd "$_" 
-yum install  -y wget sshpass python3
+
+yum install wget -y
+yum install sshpass -y
+yum install python3 -y
+
 # get kubespray release version if not exist already
 KUBESPRAY_FOLDER=./kubespray-"${KUBESPRAY_VERSION}"
 if [[ ! -d "${KUBESPRAY_FOLDER}" ]]; then
