@@ -3,7 +3,6 @@
 set -x # enable trace
 set -e # enable exit on first error
 
-KUBESPRAY_VERSION=2.17.1
 YQ_VERSION=4.15.1
 
 # validate that all needed variables were passed from orch script
@@ -27,9 +26,10 @@ mkdir -p kubespray-config && cd "$_"
 yum install  -y wget sshpass python3
 
 # get kubespray release version if not exist already
-KUBESPRAY_FOLDER=./kubespray-"${KUBESPRAY_VERSION}"
+KUBESPRAY_FOLDER=./kubespray-COMMIT6eeb488
 if [[ ! -d "${KUBESPRAY_FOLDER}" ]]; then
-        wget https://github.com/kubernetes-sigs/kubespray/archive/refs/tags/v"${KUBESPRAY_VERSION}".zip -O ./kubespray.zip
+        #wget https://github.com/kubernetes-sigs/kubespray/archive/refs/tags/v"${KUBESPRAY_VERSION}".zip -O ./kubespray.zip
+        wget https://github.com/kubernetes-sigs/kubespray/archive/6eeb4883af600400d31d9431245acc8e1e27a164.zip -O ./kubespray.zip
         unzip ./kubespray.zip
         rm ./kubespray.zip -f
 fi
