@@ -4,7 +4,7 @@ set -x # enable trace
 set -e # enable exit on first error
 
 YQ_VERSION=4.15.1
-KUBESPRAY_REF="https://github.com/kubernetes-sigs/kubespray/archive/refs/tags/v2.17.1.zip"
+KUBESPRAY_REF="https://github.com/kubernetes-sigs/kubespray/archive/6eeb4883af600400d31d9431245acc8e1e27a164.zip"
 
 
 # validate that all needed variables were passed from orch script
