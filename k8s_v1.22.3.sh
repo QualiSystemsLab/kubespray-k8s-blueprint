@@ -3,9 +3,8 @@
 set -x # enable trace
 set -e # enable exit on first error
 
+KUBESPRAY_VERSION=2.17.1
 YQ_VERSION=4.15.1
-KUBESPRAY_REF="https://github.com/kubernetes-sigs/kubespray/archive/refs/tags/v2.17.1.zip"
-
 
 # validate that all needed variables were passed from orch script
 while read -r env_var; do
@@ -26,16 +25,19 @@ cd ~/
 mkdir -p kubespray-config && cd "$_" 
 # install python packages
 yum install  -y wget sshpass python3
-# get kubespray release version
-        wget "${KUBESPRAY_REF}" -O ./kubespray.zip
+
+# get kubespray release version if not exist already
+KUBESPRAY_FOLDER=./kubespray-"${KUBESPRAY_VERSION}"
+if [[ ! -d "${KUBESPRAY_FOLDER}" ]]; then
+        wget https://github.com/kubernetes-sigs/kubespray/archive/refs/tags/v"${KUBESPRAY_VERSION}".zip -O ./kubespray.zip
         unzip ./kubespray.zip
-KUBESPRAY_FOLDER=$(find . -maxdepth 1 -type d -regextype sed -regex "./*kubespray-[.0-9a-zA-Z]*")
-echo "KUBESPRAY_FOLDER: ${KUBESPRAY_FOLDER}"
-rm ./kubespray.zip -f
+        rm ./kubespray.zip -f
+fi
 
 # install needed packages
 pip3 install wheel
-pip3 install -r ./kubespray*/requirements.txt
+pip3 install -r "${KUBESPRAY_FOLDER}"/requirements.txt 
+
 # configure ssh
 yes | ssh-keygen -q -f ~/.ssh/id_rsa  -t rsa -N ""
 
