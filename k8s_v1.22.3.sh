@@ -29,7 +29,7 @@ yum install  -y wget sshpass python3
 # get kubespray release version
         wget "${KUBESPRAY_REF}" -O ./kubespray.zip
         unzip ./kubespray.zip
-KUBESPRAY_FOLDER=$(find . -maxdepth 1 -type d -regextype sed -regex "./*kubespray-[.a-zA-Z1-9]*")
+KUBESPRAY_FOLDER=$(find . -maxdepth 1 -type d -regextype sed -regex "./*kubespray-[0-9a-zA-Z]*")
 echo "KUBESPRAY_FOLDER: ${KUBESPRAY_FOLDER}"
 rm ./kubespray.zip -f
 
