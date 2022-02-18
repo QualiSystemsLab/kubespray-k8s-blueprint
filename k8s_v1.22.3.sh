@@ -37,8 +37,7 @@ fi
 
 # install needed packages
 pip3 install wheel
-pip3 install -r "${KUBESPRAY_FOLDER}"/requirements.txt 
-
+pip3 install -r ./kubespray*/requirements.txt
 # configure ssh
 yes | ssh-keygen -q -f ~/.ssh/id_rsa  -t rsa -N ""
 
