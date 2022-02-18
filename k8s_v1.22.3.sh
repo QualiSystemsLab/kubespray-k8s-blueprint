@@ -23,8 +23,10 @@ set -u # no unset variables
 cd ~/ 
 # create a working folder and switch to it
 mkdir -p kubespray-config && cd "$_" 
-# install python packages
-yum install  -y wget sshpass python3
+
+yum install wget -y
+yum install sshpass -y
+yum install python3 -y
 
 # get kubespray release version if not exist already
 KUBESPRAY_FOLDER=./kubespray-"${KUBESPRAY_VERSION}"
@@ -75,3 +77,4 @@ set -o pipefail
 # finally, run the playbook
 ansible-playbook -i "${KUBESPRAY_FOLDER}"/inventory/mycluster/hosts.yaml  --become --become-user=root "${KUBESPRAY_FOLDER}"/cluster.yml \
     |& tee ./ansible.log
+
