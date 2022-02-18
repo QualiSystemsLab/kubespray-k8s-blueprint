@@ -29,8 +29,8 @@ yum install  -y wget sshpass python3
 # get kubespray release version
         wget "${KUBESPRAY_REF}" -O ./kubespray.zip
         unzip ./kubespray.zip
-        KUBESPRAY_FOLDER=$(find . -type d -maxdepth 1 -name kubespray*)
-        rm ./kubespray.zip -f
+KUBESPRAY_FOLDER=$(find . -maxdepth 1 -type d -name kubespray*)
+rm ./kubespray.zip -f
 
 # install needed packages
 pip3 install wheel
