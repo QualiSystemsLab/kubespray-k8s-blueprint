@@ -26,9 +26,9 @@ mkdir -p kubespray-config && cd "$_"
 yum install  -y wget sshpass python3
 
 # get kubespray release version if not exist already
-KUBESPRAY_FOLDER=./kubespray-"2.17.1"
+KUBESPRAY_FOLDER=./kubespray
 if [[ ! -d "${KUBESPRAY_FOLDER}" ]]; then
-        wget https://github.com/kubernetes-sigs/kubespray/archive/refs/tags/v"2.17.1".zip -O ./kubespray.zip
+        wget https://github.com/kubernetes-sigs/kubespray/archive/refs/tags/v2.17.1.zip -O ./kubespray.zip
         unzip ./kubespray.zip
         rm ./kubespray.zip -f
 fi
