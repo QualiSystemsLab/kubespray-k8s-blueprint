@@ -5,6 +5,7 @@ set -e # enable exit on first error
 
 YQ_VERSION=4.15.1
 KUBESPRAY_REF="https://github.com/kubernetes-sigs/kubespray/archive/refs/tags/v2.17.1.zip"
+KUBESPRAY_FOLDER="./kubespray-2.17.1"
 
 
 # validate that all needed variables were passed from orch script
@@ -28,7 +29,6 @@ mkdir -p kubespray-config && cd "$_"
 yum install  -y wget sshpass python3
 
 # get kubespray release version if not exist already
-KUBESPRAY_FOLDER=./kubespray
 if [[ ! -d "${KUBESPRAY_FOLDER}" ]]; then
         wget "${KUBESPRAY_REF}" -O ./kubespray.zip
         unzip ./kubespray.zip
