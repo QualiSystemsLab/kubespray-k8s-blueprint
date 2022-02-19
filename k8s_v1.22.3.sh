@@ -10,7 +10,6 @@ while read -r env_var; do
   [ -z "${!env_var}" ] && { echo "$env_var is empty or not set. Exiting.."; exit 1; }
 done << EOF
 APPLICATIONS_TO_CONFIGURE
-KUBERNETES_VERSION
 METALLB_IP_RANGE
 SSH_PASSWORD
 SSH_USER
