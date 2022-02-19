@@ -34,7 +34,7 @@ yum install python3 -y
         KUBESPRAY_FOLDER=$(find . -maxdepth 1 -type d -regextype sed -regex "./*kubespray-[.0-9a-zA-Z]*")
         echo "KUBESPRAY_FOLDER: ${KUBESPRAY_FOLDER}"
         rm ./kubespray.zip -f
-        
+
 # install needed packages
 pip3 install wheel
 pip3 install -r "${KUBESPRAY_FOLDER}"/requirements.txt 
@@ -65,10 +65,7 @@ fi
 
 # update yml files in place
 ./yqk e -i '
-        .kube_proxy_strict_arp = true |
-        .kube_version = strenv(KUBERNETES_VERSION)
-' "${KUBESPRAY_FOLDER}"/inventory/mycluster/group_vars/k8s_cluster/k8s-cluster.yml
-
+        .kube_proxy_strict_arp = true' "${KUBESPRAY_FOLDER}"/inventory/mycluster/group_vars/k8s_cluster/k8s-cluster.yml
 ./yqk e -i '
         .metallb_enabled = true |
         .metallb_speaker_enabled = true |
