@@ -2,7 +2,6 @@
 
 set -x # enable trace
 set -e # enable exit on first error
-KUBESPRAY_REF="https://github.com/kubernetes-sigs/kubespray/archive/refs/tags/v2.17.1.zip"
 YQ_VERSION=4.15.1
 
 # validate that all needed variables were passed from orch script
@@ -10,6 +9,7 @@ while read -r env_var; do
   [ -z "${!env_var}" ] && { echo "$env_var is empty or not set. Exiting.."; exit 1; }
 done << EOF
 APPLICATIONS_TO_CONFIGURE
+KUBESPRAY_REF
 METALLB_IP_RANGE
 SSH_PASSWORD
 SSH_USER
