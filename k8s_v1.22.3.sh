@@ -29,12 +29,11 @@ yum install sshpass -y
 yum install python3 -y
 
 # get kubespray release version if not exist already
-KUBESPRAY_FOLDER='./kubespray-2.17.1'
-if [[ ! -d "${KUBESPRAY_FOLDER}" ]]; then
         wget https://github.com/kubernetes-sigs/kubespray/archive/refs/tags/v2.17.1.zip -O ./kubespray.zip
+        KUBESPRAY_FOLDER=$(find . -maxdepth 1 -type d -regextype sed -regex "./*kubespray-[.0-9a-zA-Z]*")
+        echo "KUBESPRAY_FOLDER: ${KUBESPRAY_FOLDER}"
         unzip ./kubespray.zip
         rm ./kubespray.zip -f
-fi
 
 # install needed packages
 pip3 install wheel
