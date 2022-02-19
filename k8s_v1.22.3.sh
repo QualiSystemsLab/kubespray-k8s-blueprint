@@ -30,11 +30,11 @@ yum install python3 -y
 
 # get kubespray release version if not exist already
         wget https://github.com/kubernetes-sigs/kubespray/archive/refs/tags/v2.17.1.zip -O ./kubespray.zip
+        unzip ./kubespray.zip
         KUBESPRAY_FOLDER=$(find . -maxdepth 1 -type d -regextype sed -regex "./*kubespray-[.0-9a-zA-Z]*")
         echo "KUBESPRAY_FOLDER: ${KUBESPRAY_FOLDER}"
-        unzip ./kubespray.zip
         rm ./kubespray.zip -f
-
+        
 # install needed packages
 pip3 install wheel
 pip3 install -r "${KUBESPRAY_FOLDER}"/requirements.txt 
