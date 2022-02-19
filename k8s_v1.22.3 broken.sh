@@ -11,7 +11,6 @@ while read -r env_var; do
   [ -z "${!env_var}" ] && { echo "$env_var is empty or not set. Exiting.."; exit 1; }
 done << EOF
 APPLICATIONS_TO_CONFIGURE
-KUBERNETES_VERSION
 METALLB_IP_RANGE
 SSH_PASSWORD
 SSH_USER
@@ -66,11 +65,7 @@ if [[ ! -f ./yqk ]]; then
 fi
 
 # update yml files in place
-./yqk e -i '
-        .kube_proxy_strict_arp = true |
-        .kube_version = strenv(KUBERNETES_VERSION)
-' "${KUBESPRAY_FOLDER}"/inventory/mycluster/group_vars/k8s_cluster/k8s-cluster.yml
-
+./yqk e -i '.kube_proxy_strict_arp = true' "${KUBESPRAY_FOLDER}"/inventory/mycluster/group_vars/k8s_cluster/k8s-cluster.yml
 ./yqk e -i '
         .metallb_enabled = true |
         .metallb_speaker_enabled = true |

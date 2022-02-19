@@ -8,5 +8,5 @@ helm version --short
 
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install my-release bitnami/apache
-sleep 2
+sleep 1
 kubectl get svc
